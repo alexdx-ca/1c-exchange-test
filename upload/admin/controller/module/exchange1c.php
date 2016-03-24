@@ -308,7 +308,7 @@ class ControllerModuleExchange1c extends Controller {
 
 		// Группы
 		// ToDo Сделать универсальную проверку версии OpenCart
-		if (VERSION[0] !== '2') {
+		if (VERSION[0] !== '2.1.0.2') {
 			$this->load->model('sale/customer_group');
 			$data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups();
 		} else {
