@@ -53,7 +53,6 @@ class ControllerModuleExchange1c extends Controller {
 		$data['entry_order_status_to_exchange'] = $this->language->get('entry_order_status_to_exchange');
 		$data['entry_order_status_to_exchange_not'] = $this->language->get('entry_order_status_to_exchange_not');
 		$data['entry_dont_use_artsync'] = $this->language->get('entry_dont_use_artsync');
-		$data['entry_dont_change_directory_structure'] = $this->language->get('entry_dont_change_directory_structure');
 		$data['entry_dont_use_name'] = $this->language->get('entry_dont_use_name');
 
 		$data['text_yes'] = $this->language->get('text_yes');
@@ -231,12 +230,6 @@ class ControllerModuleExchange1c extends Controller {
 		} else {
 			$data['exchange1c_order_status_to_exchange'] = $this->config->get('exchange1c_order_status_to_exchange');
 		}
-		
-		if (isset($this->request->post['exchange1c_dont_change_directory_structure'])) {
-			$data['exchange1c_dont_change_directory_structure'] = $this->request->post['exchange1c_dont_change_directory_structure'];
-		} else {
-			$data['exchange1c_dont_change_directory_structure'] = $this->config->get('exchange1c_dont_change_directory_structure');
-		}
 
 		if (isset($this->request->post['exchange1c_dont_use_artsync'])) {
 			$data['exchange1c_dont_use_artsync'] = $this->request->post['exchange1c_dont_use_artsync'];
@@ -308,7 +301,7 @@ class ControllerModuleExchange1c extends Controller {
 
 		// Группы
 		// ToDo Сделать универсальную проверку версии OpenCart
-		if (VERSION[0] !== '2.1.0.2') {
+		if (VERSION !== '2.1.0.2') {
 			$this->load->model('sale/customer_group');
 			$data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups();
 		} else {

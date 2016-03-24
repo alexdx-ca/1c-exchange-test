@@ -165,12 +165,6 @@
                                         <input type="checkbox" value="1" id="exchange1c_dont_use_artsync" name="exchange1c_dont_use_artsync" <?php echo ($exchange1c_dont_use_artsync == 1)? 'checked' : ''; ?>>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td><label for="exchange1c_dont_change_directory_structure"><?php echo $entry_dont_change_directory_structure; ?></label></td>
-                                    <td>
-                                        <input type="checkbox" value="1" id="exchange1c_dont_change_directory_structure" name="exchange1c_dont_change_directory_structure" <?php echo ($exchange1c_dont_change_directory_structure == 1)? 'checked' : ''; ?>>
-                                    </td>
-                                </tr>
 
                               <tr>
                                 <td><label for="exchange1c_dont_use_name"><?php echo $entry_dont_use_name; ?></label></td>

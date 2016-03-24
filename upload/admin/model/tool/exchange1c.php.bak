@@ -1012,7 +1012,7 @@ class ModelToolExchange1c extends Model {
                 // Если есть, то обновляем его
                 $product_id = $this->getProductByModel($data['sku']);
 
-                if ($product_id !== false and $data['sku']!='') {
+                if ($product_id !== false and $data['sky']!='') {
                     $this->updateProduct($product, $product_id, $language_id);
                 }
                 // Если нет, то создаем новый
