@@ -526,31 +526,7 @@ class ModelToolExchange1c extends Model {
 
 				}
 
-				if ($product->Группы) {
-
-					
-					if ($this->config->get('exchange1c_dont_change_directory_structure')) {
-
-						$query = $this->db->query('SELECT product_id FROM ' . DB_PREFIX . 'product_to_1c WHERE `1c_id` = "' . $data['1c_id'].'"');
-						if ($query->num_rows==0) {
-							$category = simplexml_load_string('<document><Ид></Ид><Наименование>Новые товары</Наименование></document>');
-							$categoryData = $this->initCategory($category, 0, array(), $language_id);
-							$category_id = $this->getCategoryIdByName($categoryData['category_description'][1]['name']) ? $this->getCategoryIdByName($categoryData['category_description'][1]['name']) : $this->model_catalog_category->addCategory($categoryData);
-							$id =  (string)$category_id;
-							$this->db->query('INSERT INTO `' . DB_PREFIX . 'category_to_1c` SET category_id = ' . (int)$category_id . ', `1c_category_id` = "' . $this->db->escape($id) . '"');
-							$this->CATEGORIES[$id] = $category_id;
-							$this->insertCategory($category, $category_id, $language_id);	
-							$data['category_1c_id'] = (int)$category_id;	
-						}	
-					}
-					
-					
-					else {
-						$data['category_1c_id'] = $product->Группы->Ид;
-					}
-				
-				}
-				
+				if ($product->Группы) $data['category_1c_id'] = $product->Группы->Ид;
 				if ($product->Описание) $data['description'] = (string)$product->Описание;
 				if ($product->Статус) $data['status'] = (string)$product->Статус;
 
@@ -722,17 +698,6 @@ class ModelToolExchange1c extends Model {
 				$id =  (string)$category->Ид;
 
 				$data = array();
-
-				$query1 = $this->db->query('SELECT * FROM `' . DB_PREFIX . 'category_to_1c` WHERE `1c_category_id` = "' . $this->db->escape($id) . '"');
-				if ($query1->num_rows) {
-					$category_id1 = (int)$query1->row['category_id'];
-					$query2 = $this->db->query('SELECT category_id FROM ' . DB_PREFIX . 'category WHERE `category_id` = "' . $category_id1.'"');
-						if ($query2->num_rows==0) {
-							$this->db->query('DELETE FROM `' .  DB_PREFIX . 'category_to_1c` WHERE category_id = ' . $category_id1 );
-						
-						}
-				}
-						
 
 				$query = $this->db->query('SELECT * FROM `' . DB_PREFIX . 'category_to_1c` WHERE `1c_category_id` = "' . $this->db->escape($id) . '"');
 
@@ -1047,7 +1012,7 @@ class ModelToolExchange1c extends Model {
                 // Если есть, то обновляем его
                 $product_id = $this->getProductByModel($data['sku']);
 
-                if ($product_id !== false and $data['sku']!='') {
+                if ($product_id !== false and $data['sky']!='') {
                     $this->updateProduct($product, $product_id, $language_id);
                 }
                 // Если нет, то создаем новый
